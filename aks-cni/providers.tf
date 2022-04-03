@@ -10,7 +10,7 @@ terraform {
 
 provider "azurerm" {
   alias           = "dev"
-  subscription_id = "5b1dcd77-9361-42f2-8274-db430a1dd52e"
+  subscription_id = ""
   features {
     key_vault {
       purge_soft_delete_on_destroy = true
