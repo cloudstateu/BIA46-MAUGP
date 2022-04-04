@@ -37,72 +37,9 @@ resource "azurerm_firewall_policy" "fw01-policy" {
   }
 }
 
-resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-cni" {
+resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule" {
   provider           = azurerm.dev
-  name               = "fw-policy-rule-cni"
-  firewall_policy_id = azurerm_firewall_policy.fw01-policy.id
-  priority           = 1000
-
-  network_rule_collection {
-    name     = "rule_net_aks_443"
-    priority = 1000
-    action   = "Allow"
-
-    rule {
-      name                  = "net_aks_tcp_443"
-      protocols             = ["TCP"]
-      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
-      destination_addresses = ["*"]
-      destination_ports     = ["443"]
-    }
-
-    rule {
-      name                  = "net_aks_tcp_9000"
-      protocols             = ["TCP"]
-      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
-      destination_addresses = ["*"]
-      destination_ports     = ["9000"]
-    }
-
-    rule {
-      name                  = "net_aks_udp_1194"
-      protocols             = ["UDP"]
-      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
-      destination_addresses = ["*"]
-      destination_ports     = ["1194"]
-    }
-
-    rule {
-      name                  = "net_aks_udp_123"
-      protocols             = ["UDP"]
-      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
-      destination_addresses = ["*"]
-      destination_ports     = ["123"]
-    }
-
-    rule {
-      name                  = "net_aks_udp_53"
-      protocols             = ["UDP"]
-      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
-      destination_addresses = ["*"]
-      destination_ports     = ["53"]
-    }
-
-    rule {
-      name                  = "net_aks_all"
-      protocols             = ["Any"]
-      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
-      destination_addresses = ["*"]
-      destination_ports     = ["*"]
-    }
-  }
-
-  depends_on = [azurerm_firewall_policy_rule_collection_group.fw-policy-rule-kubenet, azurerm_firewall_policy.fw01-policy]
-}
-
-resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-kubenet" {
-  provider           = azurerm.dev
-  name               = "fw-policy-rule-kubenet"
+  name               = "fw-policy-rule"
   firewall_policy_id = azurerm_firewall_policy.fw01-policy.id
   priority           = 1001
 
@@ -112,7 +49,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-kubenet
     action   = "Allow"
 
     rule {
-      name                  = "net_aks_tcp_443"
+      name                  = "net_aks_tcp_443_kubenet"
       protocols             = ["TCP"]
       source_addresses      = azurerm_subnet.subnet-backend-kubenet.address_prefixes
       destination_addresses = ["*"]
@@ -120,7 +57,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-kubenet
     }
 
     rule {
-      name                  = "net_aks_tcp_9000"
+      name                  = "net_aks_tcp_9000_kubenet"
       protocols             = ["TCP"]
       source_addresses      = azurerm_subnet.subnet-backend-kubenet.address_prefixes
       destination_addresses = ["*"]
@@ -128,7 +65,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-kubenet
     }
 
     rule {
-      name                  = "net_aks_udp_1194"
+      name                  = "net_aks_udp_1194_kubenet"
       protocols             = ["UDP"]
       source_addresses      = azurerm_subnet.subnet-backend-kubenet.address_prefixes
       destination_addresses = ["*"]
@@ -136,7 +73,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-kubenet
     }
 
     rule {
-      name                  = "net_aks_udp_123"
+      name                  = "net_aks_udp_123_kubenet"
       protocols             = ["UDP"]
       source_addresses      = azurerm_subnet.subnet-backend-kubenet.address_prefixes
       destination_addresses = ["*"]
@@ -144,7 +81,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-kubenet
     }
 
     rule {
-      name                  = "net_aks_udp_53"
+      name                  = "net_aks_udp_53_kubenet"
       protocols             = ["UDP"]
       source_addresses      = azurerm_subnet.subnet-backend-kubenet.address_prefixes
       destination_addresses = ["*"]
@@ -152,9 +89,57 @@ resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-kubenet
     }
 
     rule {
-      name                  = "net_aks_all"
+      name                  = "net_aks_all_kubenet"
       protocols             = ["Any"]
       source_addresses      = azurerm_subnet.subnet-backend-kubenet.address_prefixes
+      destination_addresses = ["*"]
+      destination_ports     = ["*"]
+    }
+
+    rule {
+      name                  = "net_aks_tcp_443_cni"
+      protocols             = ["TCP"]
+      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
+      destination_addresses = ["*"]
+      destination_ports     = ["443"]
+    }
+
+    rule {
+      name                  = "net_aks_tcp_9000_cni"
+      protocols             = ["TCP"]
+      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
+      destination_addresses = ["*"]
+      destination_ports     = ["9000"]
+    }
+
+    rule {
+      name                  = "net_aks_udp_1194_cni"
+      protocols             = ["UDP"]
+      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
+      destination_addresses = ["*"]
+      destination_ports     = ["1194"]
+    }
+
+    rule {
+      name                  = "net_aks_udp_123_cni"
+      protocols             = ["UDP"]
+      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
+      destination_addresses = ["*"]
+      destination_ports     = ["123"]
+    }
+
+    rule {
+      name                  = "net_aks_udp_53_cni"
+      protocols             = ["UDP"]
+      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
+      destination_addresses = ["*"]
+      destination_ports     = ["53"]
+    }
+
+    rule {
+      name                  = "net_aks_all_cni"
+      protocols             = ["Any"]
+      source_addresses      = azurerm_subnet.subnet-backend-cni.address_prefixes
       destination_addresses = ["*"]
       destination_ports     = ["*"]
     }
