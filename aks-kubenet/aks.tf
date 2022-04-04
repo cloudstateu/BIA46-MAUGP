@@ -19,6 +19,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     dns_service_ip     = "10.100.128.10"
     docker_bridge_cidr = "172.17.0.1/16"
     network_policy     = "calico"
+    outbound_type      = "userDefinedRouting"
   }
 
   default_node_pool {

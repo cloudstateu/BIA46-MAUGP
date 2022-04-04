@@ -15,6 +15,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   network_profile {
     network_plugin = "azure"
     network_policy = "azure"
+    outbound_type  = "userDefinedRouting"
   }
 
   default_node_pool {
