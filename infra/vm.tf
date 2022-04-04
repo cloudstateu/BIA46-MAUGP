@@ -1,30 +1,30 @@
-resource "azurerm_public_ip" "VM-WFE01-DEV-PIP" {
+resource "azurerm_public_ip" "vm-hub-pip" {
   provider                = azurerm.dev
-  name                    = "VM-WFE01-DEV-PIP"
+  name                    = "vm-hub-pip"
   location                = azurerm_resource_group.hub-net-rg.location
   resource_group_name     = azurerm_resource_group.hub-net-rg.name
   allocation_method       = "Dynamic"
   idle_timeout_in_minutes = 30
 }
 
-resource "azurerm_network_interface" "VM-WFE01-DEV-NIC" {
+resource "azurerm_network_interface" "vm-hub-nic" {
   provider            = azurerm.dev
-  name                = "VM-WFE01-DEV-NIC"
+  name                = "vm-hub-nic"
   location            = azurerm_resource_group.hub-net-rg.location
   resource_group_name = azurerm_resource_group.hub-net-rg.name
 
   ip_configuration {
-    name                          = "VM-WFE01-DEV-NIC-CONFIG"
+    name                          = "vm-hub-nic-config"
     subnet_id                     = azurerm_subnet.vnet-hub-subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.VM-WFE01-DEV-PIP.id
+    public_ip_address_id          = azurerm_public_ip.vm-hub-pip.id
   }
 }
 
-resource "azurerm_linux_virtual_machine" "VM-WFE01-DEV" {
+resource "azurerm_linux_virtual_machine" "vm-hub" {
   provider            = azurerm.dev
-  name                = "VM-WFE01-DEV"
-  computer_name       = "VM-WFE01-DEV"
+  name                = "vm-hub"
+  computer_name       = "vm-hub"
   location            = azurerm_resource_group.hub-net-rg.location
   resource_group_name = azurerm_resource_group.hub-net-rg.name
   size                = "Standard_DS1_v2"
@@ -34,13 +34,13 @@ resource "azurerm_linux_virtual_machine" "VM-WFE01-DEV" {
   admin_password                  = var.default-admin-pass
 
   network_interface_ids = [
-    azurerm_network_interface.VM-WFE01-DEV-NIC.id,
+    azurerm_network_interface.vm-hub-nic.id,
   ]
 
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Premium_LRS"
-    name                 = "VM-WFE01-DEV-OS"
+    name                 = "vm-hub-os"
 
   }
 
