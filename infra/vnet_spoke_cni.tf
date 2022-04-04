@@ -62,6 +62,17 @@ resource "azurerm_subnet" "subnet-dedicated-cni" {
   }
 }
 
+resource "azurerm_virtual_network_dns_servers" "cni" {
+  provider           = azurerm.dev
+  virtual_network_id = azurerm_virtual_network.vnet-spoke-cni.id
+  dns_servers        = [azurerm_firewall.fw01.ip_configuration[0].private_ip_address]
+}
+
+resource "azurerm_subnet_route_table_association" "subnet-backend-cni" {
+  provider       = azurerm.dev
+  subnet_id      = azurerm_subnet.subnet-backend-cni.id
+  route_table_id = azurerm_route_table.default-fw.id
+}
 
 resource "azurerm_subnet_network_security_group_association" "subnet-frontend-nsg-association-cni" {
   provider                  = azurerm.dev

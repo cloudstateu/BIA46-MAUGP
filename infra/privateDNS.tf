@@ -19,3 +19,11 @@ resource "azurerm_private_dns_zone_virtual_network_link" "akszone-to-cni" {
   private_dns_zone_name = azurerm_private_dns_zone.akszone.name
   virtual_network_id    = azurerm_virtual_network.vnet-spoke-cni.id
 }
+
+resource "azurerm_private_dns_zone_virtual_network_link" "aks-cni-private-dns-to-hub" {
+  provider              = azurerm.dev
+  name                  = "aks-cni-private-dns-to-hub"
+  resource_group_name   = azurerm_resource_group.dev-dns-rg.name
+  private_dns_zone_name = azurerm_private_dns_zone.akszone.name
+  virtual_network_id    = azurerm_virtual_network.vnet-hub.id
+}
