@@ -97,7 +97,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-cni" {
     }
   }
 
-  depends_on = [azurerm_firewall_policy_rule_collection_group.fw-policy-rule-kubenet]
+  depends_on = [azurerm_firewall_policy_rule_collection_group.fw-policy-rule-kubenet, azurerm_firewall_policy.fw01-policy]
 }
 
 resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-kubenet" {
@@ -159,6 +159,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule-kubenet
       destination_ports     = ["*"]
     }
   }
+  depends_on = [azurerm_firewall_policy.fw01-policy]
 }
 
 output "pip-fw01-value" {
