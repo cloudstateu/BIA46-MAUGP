@@ -5,29 +5,29 @@ resource "azurerm_network_security_group" "NSG-FRONTEND" {
   resource_group_name = azurerm_resource_group.spoke-net-rg.name
 
 
-  security_rule {
-    name                       = "AllowAll_Inbound"
-    priority                   = 4095
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+  # security_rule {
+  #   name                       = "AllowAll_Inbound"
+  #   priority                   = 4095
+  #   direction                  = "Inbound"
+  #   access                     = "Allow"
+  #   protocol                   = "*"
+  #   source_port_range          = "*"
+  #   destination_port_range     = "*"
+  #   source_address_prefix      = "*"
+  #   destination_address_prefix = "*"
+  # }
 
-  security_rule {
-    name                       = "AllowAll_Outbound"
-    priority                   = 4095
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+  # security_rule {
+  #   name                       = "AllowAll_Outbound"
+  #   priority                   = 4095
+  #   direction                  = "Outbound"
+  #   access                     = "Allow"
+  #   protocol                   = "*"
+  #   source_port_range          = "*"
+  #   destination_port_range     = "*"
+  #   source_address_prefix      = "*"
+  #   destination_address_prefix = "*"
+  # }
 }
 
 resource "azurerm_network_security_group" "NSG-BACKEND" {
@@ -37,29 +37,29 @@ resource "azurerm_network_security_group" "NSG-BACKEND" {
   resource_group_name = azurerm_resource_group.spoke-net-rg.name
 
 
-  security_rule {
-    name                       = "AllowAll_Inbound"
-    priority                   = 4095
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+  # security_rule {
+  #   name                       = "AllowAll_Inbound"
+  #   priority                   = 4095
+  #   direction                  = "Inbound"
+  #   access                     = "Allow"
+  #   protocol                   = "*"
+  #   source_port_range          = "*"
+  #   destination_port_range     = "*"
+  #   source_address_prefix      = "*"
+  #   destination_address_prefix = "*"
+  # }
 
-  security_rule {
-    name                       = "AllowAll_Outbound"
-    priority                   = 4095
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+  # security_rule {
+  #   name                       = "AllowAll_Outbound"
+  #   priority                   = 4095
+  #   direction                  = "Outbound"
+  #   access                     = "Allow"
+  #   protocol                   = "*"
+  #   source_port_range          = "*"
+  #   destination_port_range     = "*"
+  #   source_address_prefix      = "*"
+  #   destination_address_prefix = "*"
+  # }
 }
 
 resource "azurerm_network_security_group" "NSG-DATA" {
@@ -69,29 +69,29 @@ resource "azurerm_network_security_group" "NSG-DATA" {
   resource_group_name = azurerm_resource_group.spoke-net-rg.name
 
 
-  security_rule {
-    name                       = "AllowAll_Inbound"
-    priority                   = 4095
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+  # security_rule {
+  #   name                       = "AllowAll_Inbound"
+  #   priority                   = 4095
+  #   direction                  = "Inbound"
+  #   access                     = "Allow"
+  #   protocol                   = "*"
+  #   source_port_range          = "*"
+  #   destination_port_range     = "*"
+  #   source_address_prefix      = "*"
+  #   destination_address_prefix = "*"
+  # }
 
-  security_rule {
-    name                       = "AllowAll_Outbound"
-    priority                   = 4095
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+  # security_rule {
+  #   name                       = "AllowAll_Outbound"
+  #   priority                   = 4095
+  #   direction                  = "Outbound"
+  #   access                     = "Allow"
+  #   protocol                   = "*"
+  #   source_port_range          = "*"
+  #   destination_port_range     = "*"
+  #   source_address_prefix      = "*"
+  #   destination_address_prefix = "*"
+  # }
 }
 
 resource "azurerm_network_security_group" "NSG-DEDICATED" {
@@ -101,27 +101,27 @@ resource "azurerm_network_security_group" "NSG-DEDICATED" {
   resource_group_name = azurerm_resource_group.spoke-net-rg.name
 
 
-  security_rule {
-    name                       = "AllowAll_Inbound"
-    priority                   = 4095
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+  # security_rule {
+  #   name                       = "AllowAll_Inbound"
+  #   priority                   = 4095
+  #   direction                  = "Inbound"
+  #   access                     = "Allow"
+  #   protocol                   = "*"
+  #   source_port_range          = "*"
+  #   destination_port_range     = "*"
+  #   source_address_prefix      = "*"
+  #   destination_address_prefix = "*"
+  # }
 
-  security_rule {
-    name                       = "AllowAll_Outbound"
-    priority                   = 4095
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+  # security_rule {
+  #   name                       = "AllowAll_Outbound"
+  #   priority                   = 4095
+  #   direction                  = "Outbound"
+  #   access                     = "Allow"
+  #   protocol                   = "*"
+  #   source_port_range          = "*"
+  #   destination_port_range     = "*"
+  #   source_address_prefix      = "*"
+  #   destination_address_prefix = "*"
+  # }
 }

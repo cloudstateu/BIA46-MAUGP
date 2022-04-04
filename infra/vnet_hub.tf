@@ -21,3 +21,9 @@ resource "azurerm_subnet" "AzureFirewallSubnet" {
   resource_group_name  = azurerm_resource_group.hub-net-rg.name
   address_prefixes     = [var.vnet-hub-azurefirewall-subnet]
 }
+
+resource "azurerm_virtual_network_dns_servers" "hub" {
+  provider           = azurerm.dev
+  virtual_network_id = azurerm_virtual_network.vnet-hub.id
+  dns_servers        = [azurerm_firewall.fw01.ip_configuration[0].private_ip_address]
+}
