@@ -1,0 +1,13 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: debugger-clusterrole-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: debugger-cluster
+subjects:
+- kind: Group
+  name: a105d0ea-d120-4b98-9c3a-75a231ed1483
+  #name: groupObjectId
+  apiGroup: rbac.authorization.k8s.io  

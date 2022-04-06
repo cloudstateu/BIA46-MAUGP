@@ -1,0 +1,1 @@
+In this simple repo you can see how to create the role and cluster role which allows the specific AAD Group to run debugger pod in the specific namespace.

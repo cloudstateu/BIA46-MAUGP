@@ -1,0 +1,8 @@
+#make sure you have the connection between aks and aad rbac
+az aks update -g aks-rg -n aks02 --enable-azure-rbac
+
+#create the specific namespace to debug
+kubectl create namespace debugger
+
+#run the debugger pod in the specific namespace
+kubectl debug node/aks-agentpool-10988189-vmss000000 -it --image=mcr.microsoft.com/dotnet/runtime-deps:6.0 --namespace=debugger
