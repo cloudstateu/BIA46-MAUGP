@@ -23,6 +23,7 @@ resource "azurerm_firewall" "fw01" {
     public_ip_address_id = azurerm_public_ip.pip-fw01.id
   }
 
+  depends_on = [azurerm_firewall_policy.fw01-policy]
 }
 
 resource "azurerm_firewall_policy" "fw01-policy" {
@@ -144,7 +145,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "fw-policy-rule" {
       destination_ports     = ["*"]
     }
   }
-  depends_on = [azurerm_firewall_policy.fw01-policy]
+  depends_on = [azurerm_firewall_policy.fw01-policy, azurerm_firewall.fw01]
 }
 
 output "pip-fw01-value" {
